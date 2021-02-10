@@ -149,18 +149,18 @@ PRIVATE SUBNET CIDR BLOCK: 10.0.1.0/24
 
 ![image](https://user-images.githubusercontent.com/42166489/107554987-a6d77200-6bfc-11eb-829c-a72782a110b4.png)
 
-![image](https://user-images.githubusercontent.com/42166489/107551655-8a393b00-6bf8-11eb-8173-82513a568c50.png)
+![image](https://user-images.githubusercontent.com/42166489/107554997-aa6af900-6bfc-11eb-8078-1c07533441ed.png)
 
 5. For DNS RESOLUTION uncheck USE DNS HOSTNAMES IN THIS VCN.Picture shows the USE DNS HOSTNAMES IN THIS VCN option is unchecked.
 Click Next.
 6. The Create a VCN with Internet Connectivity configuration dialog is displayed (not shown here) confirming all the values our just entered.
 
-![image](https://user-images.githubusercontent.com/42166489/107551781-b05edb00-6bf8-11eb-85db-3f910e123d3d.png)
+![image](https://user-images.githubusercontent.com/42166489/107555021-b0f97080-6bfc-11eb-957c-03d118160ec6.png)
 
 7. Click Create to create our VCN.
 The Creating Resources dialog is displayed (not shown here) showing all VCN components being created.
 
-![image](https://user-images.githubusercontent.com/42166489/107551816-bbb20680-6bf8-11eb-91b2-655e369b689c.png)
+![image](https://user-images.githubusercontent.com/42166489/107555061-bc4c9c00-6bfc-11eb-9115-01e52f3726e2.png)
 
 8. Click View Virtual Cloud Network to view our new VCN.
 Our new VCN is displayed. Now we need to add a security rule to allow HTTP connections on port 3000, the default port for our application.
@@ -168,7 +168,7 @@ Our new VCN is displayed. Now we need to add a security rule to allow HTTP conne
 9. With our new VCN displayed, click our Public subnet link.
 The public subnet information is displayed with the Security Lists at the bottom of the page. There should be a link to the Default Security List for our VCN.
 
-![image](https://user-images.githubusercontent.com/42166489/107551846-c66c9b80-6bf8-11eb-8052-9d337da434c2.png)
+![image](https://user-images.githubusercontent.com/42166489/107555089-c2db1380-6bfc-11eb-8bd7-7d4bd968b2cd.png)
 
 10. Click on the Default Security List link.
 The default Ingress Rules for our VCN are displayed.
