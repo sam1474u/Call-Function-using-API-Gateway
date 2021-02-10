@@ -28,7 +28,7 @@ Create a function.
 Deploy your function.
 Test your function.
 
-![image](https://user-images.githubusercontent.com/42166489/107551365-2f074880-6bf8-11eb-96e8-1fc1d8e28c9e.png)
+![image](https://user-images.githubusercontent.com/42166489/107554602-329cce80-6bfc-11eb-8c3a-7ea319648478.png)
 
 For additional information, please see:
 
