@@ -449,6 +449,49 @@ Click on “Create Deployment”
 
 ![image](https://user-images.githubusercontent.com/42166489/107553970-4dbb0e80-6bfb-11eb-9ff6-dde47ff6c17f.png)
 
+Click on Create.
+
+1. Deploy From Scratch
+
+![image](https://user-images.githubusercontent.com/42166489/107554173-98d52180-6bfb-11eb-80a0-f4dcaaf85b04.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107554182-9d99d580-6bfb-11eb-8c52-be4c795547fb.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107554239-b0aca580-6bfb-11eb-99e1-48a4f7a4efe6.png)
+
+The deployment is created.
+
+Test the gateway
+
+On the gateway details page, take note of the endpoint.
+
+![image](https://user-images.githubusercontent.com/42166489/107554295-c3bf7580-6bfb-11eb-97eb-9f21eadc4cc0.png)
+
+To test our function, copy the endpoint and append the path that with a GET request.
+
+We have created two deployments in two different ways. Now we will test both the deployments.
+
+![image](https://user-images.githubusercontent.com/42166489/107554333-d043ce00-6bfb-11eb-8a08-069f1b96af1f.png)
+
+Lets test “deploy-api”:
+
+curl -i -X GET https://dq6ovcfzxrgmgpuegmtkij6bly.apigateway.ap-mumbai-1.oci.customer-oci.com/fn/hellofunction
+
+![image](https://user-images.githubusercontent.com/42166489/107554366-dafe6300-6bfb-11eb-8fdf-c1f459af5058.png)
+
+Lets test “api-deployment”:
+curl -i -X GET https://dq6ovcfzxrgmgpuegmtkij6bly.apigateway.ap-mumbai-1.oci.customer-oci.com/v1/hellofunction
+
+![image](https://user-images.githubusercontent.com/42166489/107554403-e6ea2500-6bfb-11eb-8a49-1c5e20bd897a.png)
+
+We can see the out put now.  “Hello, world!”
+
+The url is now a public URL hence can be tested on a browser as well.
+
+![image](https://user-images.githubusercontent.com/42166489/107554431-efdaf680-6bfb-11eb-87d5-451cb07d1f82.png)
+
+This completes our tutorial.
+
 
 
 
