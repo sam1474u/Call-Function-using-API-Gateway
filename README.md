@@ -84,11 +84,11 @@ Go to Identity then Compartments.
 Select your compartment.
 Click the Copy link for the OCID field.
 
-![image](https://user-images.githubusercontent.com/42166489/107551469-5100cb00-6bf8-11eb-8767-b77ba3bd98a4.png)
+![image](https://user-images.githubusercontent.com/42166489/107554888-890a0d00-6bfc-11eb-8fb6-5077d126d1a2.png)
 
 Compartment is Created:
 
-![image](https://user-images.githubusercontent.com/42166489/107551495-59f19c80-6bf8-11eb-9b48-baec3149026a.png)
+![image](https://user-images.githubusercontent.com/42166489/107554910-8d362a80-6bfc-11eb-8765-6d80f045085f.png)
 
 Create an Authorization Token
 We create an authorization token to log in to the OCI Registry. To create an authorization token:
@@ -101,7 +101,7 @@ Give it a description.
 Click Generate Token.
 Copy the token and save it.
 
-![image](https://user-images.githubusercontent.com/42166489/107551536-683fb880-6bf8-11eb-8a22-8964e2aab370.png)
+![image](https://user-images.githubusercontent.com/42166489/107554926-93c4a200-6bfc-11eb-882f-0740542f34f2.png)
 
 Collect our Information
 
@@ -138,7 +138,7 @@ Note: For a user with admin access the username would be like: saikatdey
 
 1. From the main landing page, select Set up a network with a wizard.
 
-![image](https://user-images.githubusercontent.com/42166489/107551584-75f53e00-6bf8-11eb-9401-0e97a66969f5.png)
+![image](https://user-images.githubusercontent.com/42166489/107554957-9b844680-6bfc-11eb-9758-9569d7970e18.png)
 
 2. In the Start VCN Wizard workflow, select VCN with Internet Connectivity and then click Start VCN Wizard .
 3. In the configuration dialog, fill in the VCN Name for our VCN. Our Compartment is already set to its default value of <our-tenancy> (root).
@@ -147,7 +147,7 @@ VCN CIDR BLOCK: 10.0.0.0/16
 PUBLIC SUBNET CIDR BLOCK: 10.0.0.0/24
 PRIVATE SUBNET CIDR BLOCK: 10.0.1.0/24
 
-![image](https://user-images.githubusercontent.com/42166489/107551624-84dbf080-6bf8-11eb-9d73-16aae66590e6.png)
+![image](https://user-images.githubusercontent.com/42166489/107554987-a6d77200-6bfc-11eb-829c-a72782a110b4.png)
 
 ![image](https://user-images.githubusercontent.com/42166489/107551655-8a393b00-6bf8-11eb-8173-82513a568c50.png)
 
