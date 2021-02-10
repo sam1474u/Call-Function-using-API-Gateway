@@ -360,6 +360,99 @@ Add the compartment id in the value field.
 
 
 
+![image](https://user-images.githubusercontent.com/42166489/107553318-a5a54580-6bfa-11eb-8adb-b7a4dd06a2a7.png)
+
+Once done press “Add Rule”. The required rule is added.
+
+![image](https://user-images.githubusercontent.com/42166489/107553368-b2299e00-6bfa-11eb-8266-1b5c93929283.png)
+
+Rule: 
+All {instance.compartment.id = 'ocid1.compartment.oc1..aaaaaaaa2nmz2tuisdthmpeisu6ubjsenbvabvuzxigxst4vbzrnsp7i4csq'}
+
+Create a Policy:
+Now we'll need to create a policy that is specific to your tenancy and the newly created dynamic group. You'll need to substitute your own group name and compartment name as appropriate:
+
+![image](https://user-images.githubusercontent.com/42166489/107553419-c1105080-6bfa-11eb-9b31-1d3d036defd6.png)
+
+Now we'll need to create a policy that is specific to your tenancy and the newly created dynamic group. You'll need to substitute your own group name and compartment name as appropriate:
+
+![image](https://user-images.githubusercontent.com/42166489/107553457-cb324f00-6bfa-11eb-863a-204224533471.png)
+
+Click on “Create Policy”.
+
+Eg: allow dynamic-group [your dynamic group] to use functions-family in compartment [your compartment name]
+
+![image](https://user-images.githubusercontent.com/42166489/107553494-d6857a80-6bfa-11eb-8bda-68bb54732679.png)
+
+Click on “Customize” and enter the commands.
+
+![image](https://user-images.githubusercontent.com/42166489/107553540-e1d8a600-6bfa-11eb-9e72-08cac106572b.png)
+
+Next add another policy statement:
+
+ALLOW any-user to use functions-family in compartment <functions-compartment-name> where ALL {request.principal.type= 'ApiGateway', request.resource.compartment.id = '<api-gateway-compartment-OCID>'}
+
+Eg: 
+ALLOW any-user to use functions-family in compartment workshops where ALL {request.principal.type= 'ApiGateway', request.resource.compartment.id = 'ocid1.compartment.oc1..aaaaaaaa2nmz2tuisdthmpeisu6ubjsenbvabvuzxigxst4vbzrnsp7i4csq'}
+
+![image](https://user-images.githubusercontent.com/42166489/107553598-f3ba4900-6bfa-11eb-8c28-0809f03de34a.png)
+
+Policy is added.
+
+![image](https://user-images.githubusercontent.com/42166489/107553639-fae15700-6bfa-11eb-8c88-ffcf55ca4c6b.png)
+
+Update: Now we can also skip the dynamic group creation by changing your policy definition like so:
+
+Now, let's create the gateway!
+
+Create the gateway
+
+To create the gateway, first select 'API Gateway' under 'Developer Services' in the sidebar menu:
+
+![image](https://user-images.githubusercontent.com/42166489/107553727-0f255400-6bfb-11eb-8bfc-2d4184536230.png)
+
+Click 'Create Gateway' and populate the dialog, making sure to choose the regional subnet that we created earlier.
+
+![image](https://user-images.githubusercontent.com/42166489/107553782-1e0c0680-6bfb-11eb-84b7-5cc699bde8d7.png)
+
+Once done the Gateway will be created.
+
+![image](https://user-images.githubusercontent.com/42166489/107553827-2a905f00-6bfb-11eb-9416-468c036fe197.png)
+
+Now there are two ways to create a Deployment.
+1. Deploying a Spec
+2.Creating from Scratch
+
+1. Deploy a spec to the gateway
+
+Before we can create a deployment we will need to craft a deployment spec file in JSON format to define our endpoints. Make sure you have the function OCID from above handy. Now, create a file called spec.json in the root of your function and populate it as follows (substitute your function OCID):
+
+{
+ "routes": [
+  {
+   "path": "/hellofunction",
+   "methods": [
+    "GET"
+   ],
+   "backend": {
+    "type": "ORACLE_FUNCTIONS_BACKEND",
+    "functionId": "ocid1.fnfunc.oc1.ap-mumbai-1.aaaaaaaaacdqlyex2kc64rcmi6c4ubhvho6tgxjvgc4ii4fywkmeliexn5nq"
+   }
+  }
+ ]
+}
+Click on “Create Deployment”
+
+![image](https://user-images.githubusercontent.com/42166489/107553908-3da32f00-6bfb-11eb-9e03-ba3532889c74.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107553937-46940080-6bfb-11eb-8577-f895cc647712.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107553970-4dbb0e80-6bfb-11eb-9ff6-dde47ff6c17f.png)
+
+
+
+
+
 
 
 
