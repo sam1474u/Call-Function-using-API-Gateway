@@ -17,6 +17,7 @@ Create and deploy a "hello world" serverless function
 
 We need a Oracle Cloud Infrastructure account to set up Oracle Functions development using Cloud Shell. Then, we create a function application and a function. Key tasks include how to:
 
+```
 Set up an authentication token.
 Gather required information.
 Set up a VCN.
@@ -27,6 +28,7 @@ Create an app for your Oracle function.
 Create a function.
 Deploy your function.
 Test your function.
+```
 
 ![image](https://user-images.githubusercontent.com/42166489/107554602-329cce80-6bfc-11eb-8c3a-7ea319648478.png)
 
@@ -48,10 +50,12 @@ Your OCI account configured to support Oracle Functions development. See Create 
 https://www.oracle.com/webfolder/technetwork/tutorials/infographics/oci_functions_cloudshell_quickview/functions_quickview_top/functions_quickview/index.html#
 OCI Cloud Shell which is included with your account and includes:
 
+```
 OCI CLI
 Python 3.6+
 Java 1.8+
 Node.js 10+
+```
 
 1.Gather Required Information
 
@@ -107,6 +111,7 @@ Collect our Information
 
 Collect all the information needed to complete the tutorial. Copy the following information into your notepad.
 
+```
 Region: <region-identifier>
 Example: ap-mumbai-1.
 
@@ -131,6 +136,7 @@ From your user avatar, go to Tenancy: <your-tenancy> and copy OCID, example: oci
 Username: <user-name>
 From your user avatar.
 Eg: oracleidentitycloudservice/Saikat
+```
 
 Note: For a user with admin access the username would be like: saikatdey
 
@@ -207,11 +213,13 @@ Note: View/Edit your Context
 
 Our Fn context files are located in the ~/.fn/contexts directory. Each context is stored in a .yaml file. For example, our us-phoenix-1.yaml file might look similar to:
 
+```
 api-url: https://functions.us-phoenix-1.oci.oraclecloud.com
 oracle.compartment-id: ocid1.compartment.oc1..aaaaaaaarvdfa72n...
 provider: oraclecs
 registry: phx.ocir.io/my-tenancy/my-func-prj
-                
+```
+
 We can edit the file directly with an editor if necessary.
 For a detailed explanation of each step, see: 
 https://www.oracle.com/webfolder/technetwork/tutorials/infographics/oci_functions_cloudshell_quickview/functions_quickview_top/functions_quickview/index.html#
@@ -229,10 +237,12 @@ Open Developer Services and then Functions which are part of the Solutions and P
 Click Create Application.
 Fill in the form data.
 
+```
 Name: <your-app-name>
 VCN: <your-VCN>
 Subnets: <your-public-subnet> or <your-private-subnet>
- 
+```
+
 Note: A public or private subnet may be used, select one.
 Click Create.
 Our app is created.
@@ -263,6 +273,7 @@ Create a Java "Hello World" function with Fn.
 fn init --runtime java my-func-name
 This command creates a directory named my-func-name with several files in it.
 
+```
 func.yaml - Function configuration file.
 pom.xml - Maven build file.
 src/main/java/com/example/fn/HelloFunction.java - The actual function file.
@@ -270,8 +281,11 @@ Change into the directory.
 Deploy the function.
 
 fn -v deploy --app your-app-name
+```
+
 Various messages are displayed as the docker images are built, pushed to OCIR, and eventually deployed to Oracle Functions.
 
+```
 Invoke the function.
 fn invoke your-app-name my-func-name
 
@@ -280,6 +294,7 @@ Returns: Hello, world!
 Invoke the function with a parameter.
 echo -n "Bob" | fn invoke your-app-name my-func-name
 Returns: Hello, Bob!
+```
 
 ![image](https://user-images.githubusercontent.com/42166489/107552460-8e198d00-6bf9-11eb-8b6f-45bd0c713a29.png)
 
@@ -290,6 +305,7 @@ If you want to connect to your function from the net, you need to get the functi
 fn inspect function your-app-name my-func-name
 
 Examine the results of the inspect command. Notice the invoke endpoint URL is included in the annotatins section of the returned JSON data.
+```
 {
     "annotations": {
         "fnproject.io/fn/invokeEndpoint": "https://aaaaaaaaa.us-ashburn-1.functions.oci.oraclecloud.com/1111111/functions/ocid1.fnfunc.oc1.iad.aaaaaaaaa.../actions/invoke",
@@ -298,8 +314,10 @@ Examine the results of the inspect command. Notice the invoke endpoint URL is in
 Use the URL returned from inspect to invoke the function. Because functions require requests to be digitally signed, the oci raw-request command is used for this example.
 oci raw-request --http-method POST --request-body "" --target-uri https://https://aaaaaaaaa.us-ashburn-1.functions.oci.oraclecloud.com/1111111/functions/ocid1.fnfunc.oc1.iad.aaaaaaaaa.../actions/invoke
 
+```
 The command returns:
 
+```
 {
     "data": "Hello, world!",
     "headers": {
@@ -312,7 +330,8 @@ The command returns:
     },
     "status": "200 OK"
 }
- 
+```
+
 Note: We can connect to a Functions endpoint using tools like curl. However, because of security considerations, the script is complex. For details and an example, see the oci-curl section on the Invoking Functions page.
 
 ![image](https://user-images.githubusercontent.com/42166489/107552574-b1443c80-6bf9-11eb-9296-4a955a504d10.png)
@@ -427,6 +446,7 @@ Now there are two ways to create a Deployment.
 
 Before we can create a deployment we will need to craft a deployment spec file in JSON format to define our endpoints. Make sure you have the function OCID from above handy. Now, create a file called spec.json in the root of your function and populate it as follows (substitute your function OCID):
 
+```
 {
  "routes": [
   {
@@ -441,6 +461,8 @@ Before we can create a deployment we will need to craft a deployment spec file i
   }
  ]
 }
+```
+
 Click on “Create Deployment”
 
 ![image](https://user-images.githubusercontent.com/42166489/107553908-3da32f00-6bfb-11eb-9e03-ba3532889c74.png)
@@ -475,12 +497,16 @@ We have created two deployments in two different ways. Now we will test both the
 
 Lets test “deploy-api”:
 
+```
 curl -i -X GET https://dq6ovcfzxrgmgpuegmtkij6bly.apigateway.ap-mumbai-1.oci.customer-oci.com/fn/hellofunction
+```
 
 ![image](https://user-images.githubusercontent.com/42166489/107554366-dafe6300-6bfb-11eb-8fdf-c1f459af5058.png)
 
 Lets test “api-deployment”:
+```
 curl -i -X GET https://dq6ovcfzxrgmgpuegmtkij6bly.apigateway.ap-mumbai-1.oci.customer-oci.com/v1/hellofunction
+```
 
 ![image](https://user-images.githubusercontent.com/42166489/107554403-e6ea2500-6bfb-11eb-8a49-1c5e20bd897a.png)
 
