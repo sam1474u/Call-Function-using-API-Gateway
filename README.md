@@ -238,6 +238,128 @@ Click Create.
 Our app is created.
 
 
+![image](https://user-images.githubusercontent.com/42166489/107552398-780bcc80-6bf9-11eb-842d-be1852903f52.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107552411-7e9a4400-6bf9-11eb-803c-226454ddbd52.png)
+
+Choose a Language to Create and Deploy a Function
+
+Select one of the following languages to create and deploy a function. If you want, you can do all three.
+
+Select one of the following languages to create and deploy a function. If you want, you can do all three.
+
+Create and Deploy a Java Function
+With your application created, deploy a Java function. Follow these steps to create a Java "Hello World" function.
+
+Note: Ensure Java 8+ is installed to perform these steps.
+Open Cloud Shell.
+
+Create a directory to store your functions and change into that directory.
+mkdir my-dir-name
+cd my-dir-name                        
+                    
+Create a Java "Hello World" function with Fn.
+
+fn init --runtime java my-func-name
+This command creates a directory named my-func-name with several files in it.
+
+func.yaml - Function configuration file.
+pom.xml - Maven build file.
+src/main/java/com/example/fn/HelloFunction.java - The actual function file.
+Change into the directory.
+Deploy the function.
+
+fn -v deploy --app your-app-name
+Various messages are displayed as the docker images are built, pushed to OCIR, and eventually deployed to Oracle Functions.
+
+Invoke the function.
+fn invoke your-app-name my-func-name
+
+Returns: Hello, world!
+
+Invoke the function with a parameter.
+echo -n "Bob" | fn invoke your-app-name my-func-name
+Returns: Hello, Bob!
+
+![image](https://user-images.githubusercontent.com/42166489/107552460-8e198d00-6bf9-11eb-8b6f-45bd0c713a29.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107552489-983b8b80-6bf9-11eb-8ac3-64f0fb311f34.png)
+
+If you want to connect to your function from the net, you need to get the function's invoke endpoint. To find our invoke endpoint use the inspect command.
+
+fn inspect function your-app-name my-func-name
+
+Examine the results of the inspect command. Notice the invoke endpoint URL is included in the annotatins section of the returned JSON data.
+{
+    "annotations": {
+        "fnproject.io/fn/invokeEndpoint": "https://aaaaaaaaa.us-ashburn-1.functions.oci.oraclecloud.com/1111111/functions/ocid1.fnfunc.oc1.iad.aaaaaaaaa.../actions/invoke",
+        "oracle.com/oci/compartmentId": "ocid1.compartment.oc1..aaaaaaaa...",
+        "__comment":"Remaining output left out for brevity",
+Use the URL returned from inspect to invoke the function. Because functions require requests to be digitally signed, the oci raw-request command is used for this example.
+oci raw-request --http-method POST --request-body "" --target-uri https://https://aaaaaaaaa.us-ashburn-1.functions.oci.oraclecloud.com/1111111/functions/ocid1.fnfunc.oc1.iad.aaaaaaaaa.../actions/invoke
+
+The command returns:
+
+{
+    "data": "Hello, world!",
+    "headers": {
+        "Content-Length": "13",
+        "Content-Type": "text/plain",
+        "Date": "Tue, 20 Oct 2020 00:53:08 GMT",
+        "Fn-Call-Id": "11111111111",
+        "Fn-Fdk-Version": "fdk-java/1.0.111 (jvm=OpenJDK 64-Bit Server VM, jvmv=11.0.8)",
+        "Opc-Request-Id": "1111111/11111"
+    },
+    "status": "200 OK"
+}
+ 
+Note: We can connect to a Functions endpoint using tools like curl. However, because of security considerations, the script is complex. For details and an example, see the oci-curl section on the Invoking Functions page.
+
+![image](https://user-images.githubusercontent.com/42166489/107552574-b1443c80-6bf9-11eb-9296-4a955a504d10.png)
+
+![image](https://user-images.githubusercontent.com/42166489/107552589-b6a18700-6bf9-11eb-9e44-11dbdb27ea5f.png)
+
+We have successfully deployed and tested a Java function.
+
+We can invoke this function with the fn CLI at this point but we can't invoke the function directly via HTTP(s) without signing the request or using the OCI SDK. 
+
+Trying to invoke will end up returning a 401 Unauthorized:
+
+Saikat_Dey@cloudshell:helloFunction (ap-mumbai-1)$ curl -i -X GET https://odu37kimtfq.ap-mumbai-1.functions.oci.oraclecloud.com/20181201/functions/ocid1.fnfunc.oc1.ap-mumbai-1.aaaaaaaaacdqlyex2kc64rcmi6c4ubhvho6tgxjvgc4ii4fywkmeliexn5nq/actions/invoke
+
+![image](https://user-images.githubusercontent.com/42166489/107552642-c7ea9380-6bf9-11eb-95a2-e99198aa379d.png)
+
+But once we put our serverless function behind our gateway we can invoke it via HTTPS. 
+
+That is what we will try to do now.
+
+5.Setting up the API Gateway.
+
+Create a subnet suitable for our API gateway
+
+We'll need a regional subnet for our API gateway that has an ingress rule for HTTPS traffic, so add one now to our existing VCN subnets. 
+
+Now edit the chosen security list to add in ingress rule for port 443:
+
+![image](https://user-images.githubusercontent.com/42166489/107552697-dcc72700-6bf9-11eb-8af8-dcababa0fb5e.png)
+
+Add a ingress rule:
+
+![image](https://user-images.githubusercontent.com/42166489/107552738-e8b2e900-6bf9-11eb-9760-04b8378b4eed.png)
+
+Ingress rule added to SL.
+
+Create a dynamic group and apply the necessary policies for API gateway
+
+The API gateway uses dynamic groups to manage access in your tenancy so we will need to create a new dynamic group and set some policies. We'll need the compartment OCID for the compartment that we're going to create our gateway within, so hit Identity -> Compartments and copy the OCID that you are planning to use. Next, create a new dynamic group with the following definition (substituting the proper compartment OCID):
+
+![image](https://user-images.githubusercontent.com/42166489/107552806-fe281300-6bf9-11eb-92e1-c37923c2b0cd.png)
+
+Click on “Rule Builder” link to create a rule for the compartment.
+Add the compartment id in the value field.
+
+
+
 
 
 
