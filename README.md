@@ -11,8 +11,6 @@ Create the gateway
 Deploy a spec to the gateway
 Test the gateway
 
-Create and deploy a "hello world" serverless function
-
 
 We need a Oracle Cloud Infrastructure account to set up Oracle Functions development using Cloud Shell. Then, we create a function application and a function. Key tasks include how to:
 
